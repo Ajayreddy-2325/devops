@@ -54,9 +54,24 @@ services:
     networks:
       - tourism-network
 
+  # Jenkins for CI/CD pipeline demo
+  jenkins:
+    image: jenkins/jenkins:lts-jdk17
+    container_name: tourism-jenkins
+    ports:
+      - "8088:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    networks:
+      - tourism-network
+
 networks:
   tourism-network:
     driver: bridge
 
 volumes:
   prometheus_data:
+  jenkins_home:

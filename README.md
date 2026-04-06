@@ -23,10 +23,11 @@ Deploy your tourism website using Docker, Kubernetes, AWS, and GitHub Actions CI
 │   └── variables.tf            # Terraform variables
 ├── monitoring/
 │   └── prometheus.yml          # Metrics config
+├── Jenkinsfile                 # Jenkins pipeline
 └── .github/workflows/
     └── ci-cd.yml               # GitHub Actions pipeline
 
-_Legacy:_ The earlier Node/Postgres demo project was archived at `_legacy_devops_app_2026-04-05/`.
+_Legacy:_ The earlier Node/Postgres demo project was archived at `legacy-devops/`.
 ```
 
 ## 🚀 Quick Start
@@ -45,6 +46,9 @@ open http://localhost:8080
 
 # View metrics
 open http://localhost:8090
+
+# Jenkins UI
+open http://localhost:8088
 
 # Stop services
 docker-compose down
@@ -173,6 +177,24 @@ git push origin main
 
 # GitHub Actions automatically deploys!
 ```
+
+## 🧰 Jenkins CI/CD (Optional)
+
+This project also includes a Jenkins pipeline definition in `Jenkinsfile`.
+
+### Run Jenkins locally
+
+```bash
+docker-compose up -d jenkins
+```
+
+### First-time Jenkins setup
+
+```bash
+docker exec tourism-jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+```
+
+Then open `http://localhost:8088`, complete setup, and create a Pipeline job that points to this repository and uses the root `Jenkinsfile`.
 
 ## 📊 Monitoring
 
